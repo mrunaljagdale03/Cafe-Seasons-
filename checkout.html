@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="checkout-page">
+    <div class="checkout-box">
+        <a href="/" class="back-link">← Back to menu</a>
+        <h2>Generate Bill</h2>
+        <p class="text-muted">Check your bill, choose payment method, then confirm order.</p>
+
+        <div id="checkout-cart" class="mb-3"></div>
+
+        <form id="checkoutForm">
+            <label>Your Name</label>
+            <input type="text" id="customer_name" class="form-control mb-3" required>
+
+            <label>Phone Number</label>
+            <input type="text" id="phone" class="form-control mb-3">
+
+            <label>Table Number</label>
+            <input type="text" id="table_no" class="form-control mb-3" value="{{ table_no }}" required>
+
+            <label>Payment Method</label>
+            <select id="payment_method" class="form-control mb-3" onchange="togglePaymentBox()">
+                <option value="Pay at Counter">Pay at Counter</option>
+                <option value="UPI Online Payment">UPI Online Payment</option>
+                <option value="Card at Counter">Card at Counter</option>
+                <option value="Cash at Counter">Cash at Counter</option>
+            </select>
+
+            <div id="paymentBox" class="payment-box mb-3" style="display:none;">
+                <h5>UPI Online Payment</h5>
+                <p>Pay using Google Pay, PhonePe, Paytm or any UPI app.</p>
+
+                <div class="upi-card">
+                    <div class="qr-demo">
+                        <div class="qr-grid"></div>
+                    </div>
+                    <div>
+                        <p class="mb-1"><b>UPI ID:</b> {{ cafe.upi_id }}</p>
+                        <p class="mb-1"><b>Name:</b> {{ cafe.upi_name }}</p>
+                        <p class="mb-2"><b>Amount:</b> ₹<span id="upiAmount">0</span></p>
+                        <a id="upiPayLink" href="#" class="primary-btn small-btn">Open UPI App</a>
+                    </div>
+                </div>
+
+                <small class="text-muted d-block mt-2">
+                    Note: In this demo project, admin will verify the payment manually and mark it as Paid.
+                    Replace UPI ID in app.py with real cafe UPI ID.
+                </small>
+            </div>
+
+            <div class="final-bill-box">
+                <h5>Final Bill</h5>
+                <div class="d-flex justify-content-between">
+                    <span>Grand Total</span>
+                    <strong>₹<span id="grandTotal">0</span></strong>
+                </div>
+            </div>
+
+            <button class="primary-btn w-100 mt-3">Confirm Order</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

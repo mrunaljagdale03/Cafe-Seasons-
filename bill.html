@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bill-page">
+    <div class="bill-box">
+        <h2>{{ cafe.display_name }}</h2>
+        <p>{{ cafe.address }}</p>
+        <hr>
+        <h5>Bill / Order #{{ order.order_id }}</h5>
+        <p><b>Customer:</b> {{ order.customer_name }}</p>
+        <p><b>Table:</b> {{ order.table_no }}</p>
+        <p><b>Payment:</b> {{ order.payment_method }} - {{ order.payment_status }}</p>
+        <table class="table">
+            <thead>
+                <tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price }}</td>
+                    <td>₹{{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3 class="text-end">Total: ₹{{ order.total_amount }}</h3>
+        <button onclick="window.print()" class="primary-btn">Print Bill</button>
+        <a href="/dashboard" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

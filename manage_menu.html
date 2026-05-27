@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="navbar admin-nav">
+    <div class="container">
+        <strong>Manage Menu</strong>
+        <div>
+            <a href="/dashboard" class="btn btn-light btn-sm">Dashboard</a>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="panel-card mb-4">
+        <h4>Add New Menu Item</h4>
+        <form method="POST" class="row g-3">
+            <div class="col-md-3"><input name="item_name" class="form-control" placeholder="Item name" required></div>
+            <div class="col-md-2"><input name="category" class="form-control" placeholder="Category" required></div>
+            <div class="col-md-2"><input name="price" type="number" class="form-control" placeholder="Price" required></div>
+            <div class="col-md-3"><input name="description" class="form-control" placeholder="Description"></div>
+            <div class="col-md-2">
+                <select name="availability" class="form-control">
+                    <option>Available</option>
+                    <option>Unavailable</option>
+                </select>
+            </div>
+            <div class="col-md-10"><input name="image" class="form-control" placeholder="Image URL"></div>
+            <div class="col-md-2"><button class="primary-btn w-100">Add</button></div>
+        </form>
+    </div>
+
+    {% for item in menu_items %}
+    <div class="panel-card mb-3">
+        <form method="POST" action="/update_menu/{{ item.item_id }}" class="row g-2 align-items-center">
+            <div class="col-md-2"><input name="item_name" value="{{ item.item_name }}" class="form-control"></div>
+            <div class="col-md-2"><input name="category" value="{{ item.category }}" class="form-control"></div>
+            <div class="col-md-1"><input name="price" value="{{ item.price }}" type="number" class="form-control"></div>
+            <div class="col-md-3"><input name="description" value="{{ item.description }}" class="form-control"></div>
+            <div class="col-md-2">
+                <select name="availability" class="form-control">
+                    <option {% if item.availability == 'Available' %}selected{% endif %}>Available</option>
+                    <option {% if item.availability == 'Unavailable' %}selected{% endif %}>Unavailable</option>
+                </select>
+            </div>
+            <div class="col-md-12"><input name="image" value="{{ item.image }}" class="form-control"></div>
+            <div class="col-md-2"><button class="btn btn-success w-100">Save</button></div>
+            <div class="col-md-2"><a href="/delete_menu/{{ item.item_id }}" onclick="return confirm('Delete this item?')" class="btn btn-danger w-100">Delete</a></div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

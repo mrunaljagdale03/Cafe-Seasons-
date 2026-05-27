@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<nav class="navbar customer-nav sticky-top">
+    <div class="container">
+        <div>
+            <strong>{{ cafe.display_name }}</strong>
+            <small class="d-block">College Road, Nashik</small>
+        </div>
+        <button class="cart-top-btn" onclick="openCart()">🛒 <span id="cart-count">0</span></button>
+    </div>
+</nav>
+
+<section class="customer-hero">
+    <div class="container">
+        <div class="hero-card">
+            <span class="mini-label">QR Digital Menu</span>
+            <h1>{{ cafe.display_name }}</h1>
+            <p>{{ cafe.tagline }}</p>
+            <p class="small-info">{{ cafe.cuisines }}</p>
+            {% if table_no %}
+            <div class="table-chip">Table {{ table_no }}</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<main class="container pb-5">
+    <div class="category-scroll mt-3">
+        <button class="cat-btn active" onclick="filterCategory('All', this)">All</button>
+        {% for category in categories %}
+        <button class="cat-btn" onclick="filterCategory('{{ category }}', this)">{{ category }}</button>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-4">
+        {% for item in menu_items %}
+        <div class="col-lg-4 col-md-6 mb-4 menu-card-wrapper" data-category="{{ item.category }}">
+            <div class="food-card">
+                <img src="{{ item.image }}" alt="{{ item.item_name }}">
+                <div class="food-body">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <div>
+                            <span class="food-category">{{ item.category }}</span>
+                            <h5>{{ item.item_name }}</h5>
+                        </div>
+                        <strong class="price">₹{{ item.price }}</strong>
+                    </div>
+                    <p>{{ item.description }}</p>
+                    <button class="add-btn w-100" onclick="addToCart('{{ item.item_id }}', '{{ item.item_name }}', '{{ item.price }}')">Add to Cart +</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+        <h4>Your Order</h4>
+        <button onclick="closeCart()">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-footer">
+        <h5>Total: ₹<span id="cart-total">0</span></h5>
+        <a id="checkoutLink" class="primary-btn w-100 text-center" href="/checkout?table={{ table_no }}">Checkout</a>
+    </div>
+</div>
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+{% endblock %}

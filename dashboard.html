@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<nav class="navbar admin-nav">
+    <div class="container">
+        <strong>Owner Dashboard</strong>
+        <div>
+            <a href="/manage_menu" class="btn btn-light btn-sm">Manage Menu</a>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-4">
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card"><h4>{{ orders|length }}</h4><p>Total Orders</p></div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card"><h4>{{ pending_count }}</h4><p>Pending Orders</p></div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card"><h4>₹{{ "%.2f"|format(total_sales) }}</h4><p>Total Sales</p></div>
+        </div>
+    </div>
+
+    <h3>Live Orders</h3>
+    <p class="text-muted">Auto-refresh every 8 seconds.</p>
+
+    {% for order in orders %}
+    <div class="order-card">
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+            <div>
+                <h5>Order #{{ order.order_id }} | Table {{ order.table_no }}</h5>
+                <p><b>Name:</b> {{ order.customer_name }} | <b>Phone:</b> {{ order.phone }}</p>
+                <p><b>Payment Method:</b> {{ order.payment_method }}</p>
+                <p>
+                    <b>Payment Status:</b>
+                    <span class="status-badge">{{ order.payment_status }}</span>
+                </p>
+                <p><b>Order Status:</b> <span class="status-badge">{{ order.order_status }}</span></p>
+                <p><b>Time:</b> {{ order.order_time }}</p>
+            </div>
+            <div class="text-end">
+                <h4>₹{{ order.total_amount }}</h4>
+                <a href="/bill/{{ order.order_id }}" class="btn btn-outline-dark btn-sm">View / Print Bill</a>
+            </div>
+        </div>
+
+        <ul class="mt-2">
+            {% for item in order.items %}
+            <li>{{ item.item_name }} × {{ item.quantity }} = ₹{{ item.subtotal }}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="row g-2">
+            <div class="col-md-6">
+                <form method="POST" action="/update_status/{{ order.order_id }}" class="d-flex gap-2">
+                    <select name="order_status" class="form-control">
+                        <option {% if order.order_status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option {% if order.order_status == 'Preparing' %}selected{% endif %}>Preparing</option>
+                        <option {% if order.order_status == 'Completed' %}selected{% endif %}>Completed</option>
+                        <option {% if order.order_status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+                    <button class="btn btn-success">Update Order</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <form method="POST" action="/update_payment/{{ order.order_id }}" class="d-flex gap-2">
+                    <select name="payment_status" class="form-control">
+                        <option {% if order.payment_status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option {% if order.payment_status == 'Pending Verification' %}selected{% endif %}>Pending Verification</option>
+                        <option {% if order.payment_status == 'Paid' %}selected{% endif %}>Paid</option>
+                        <option {% if order.payment_status == 'Failed' %}selected{% endif %}>Failed</option>
+                        <option {% if order.payment_status == 'Refunded' %}selected{% endif %}>Refunded</option>
+                    </select>
+                    <button class="btn btn-dark">Update Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No orders yet.</div>
+    {% endfor %}
+</div>
+
+<script>
+setTimeout(() => location.reload(), 8000);
+</script>
+
+{% endblock %}

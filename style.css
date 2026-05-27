@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* { font-family: 'Poppins', sans-serif; }
+
+body {
+    background: #fffaf0;
+    color: #2e2018;
+}
+
+.customer-nav {
+    background: rgba(46, 32, 24, 0.96);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+.cart-top-btn {
+    background: #d7a84f;
+    color: #2e2018;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 700;
+}
+
+.customer-hero {
+    background: linear-gradient(135deg, #2e2018, #7b552d);
+    padding: 50px 0 30px;
+}
+
+.hero-card {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 30px;
+    padding: 35px;
+    backdrop-filter: blur(10px);
+}
+
+.hero-card h1 {
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.mini-label {
+    background: #d7a84f;
+    color: #2e2018;
+    padding: 7px 15px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.small-info {
+    opacity: 0.88;
+}
+
+.table-chip {
+    display: inline-block;
+    background: white;
+    color: #2e2018;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.cat-btn {
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: white;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.cat-btn.active {
+    background: #2e2018;
+    color: white;
+}
+
+.food-card {
+    background: white;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    height: 100%;
+    transition: 0.25s ease;
+}
+
+.food-card:hover {
+    transform: translateY(-6px);
+}
+
+.food-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.food-body {
+    padding: 18px;
+}
+
+.food-category {
+    font-size: 12px;
+    color: #7b552d;
+    background: #fff0cc;
+    padding: 5px 11px;
+    border-radius: 999px;
+}
+
+.food-body h5 {
+    margin-top: 10px;
+    font-weight: 800;
+}
+
+.food-body p {
+    min-height: 48px;
+    font-size: 14px;
+    color: #7b6a5d;
+}
+
+.price {
+    font-size: 18px;
+    color: #7b552d;
+}
+
+.add-btn, .primary-btn {
+    background: #2e2018;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.add-btn:hover, .primary-btn:hover {
+    background: #7b552d;
+    color: white;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -430px;
+    width: 410px;
+    max-width: 92%;
+    height: 100vh;
+    background: white;
+    z-index: 2000;
+    padding: 22px;
+    box-shadow: -14px 0 35px rgba(0,0,0,0.22);
+    transition: 0.3s ease;
+    overflow-y: auto;
+}
+
+.cart-drawer.open { right: 0; }
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-header button {
+    border: 0;
+    background: #2e2018;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    font-size: 24px;
+}
+
+.cart-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.qty-btn {
+    background: #d7a84f;
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-weight: 800;
+}
+
+.cart-footer {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding-top: 15px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1500;
+}
+
+.overlay.show { display: block; }
+
+.checkout-page, .success-page, .admin-login-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #2e2018, #7b552d);
+}
+
+.checkout-box, .success-box, .admin-login-box, .panel-card, .order-card, .stat-card, .bill-box {
+    background: white;
+    border-radius: 26px;
+    padding: 26px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.checkout-box, .success-box, .admin-login-box {
+    width: 100%;
+    max-width: 560px;
+}
+
+.back-link {
+    color: #7b552d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.admin-nav {
+    background: #2e2018;
+    color: white;
+}
+
+.stat-card h4 {
+    font-weight: 800;
+}
+
+.order-card {
+    border-left: 7px solid #d7a84f;
+    margin-bottom: 20px;
+}
+
+.bill-page {
+    padding: 30px;
+}
+
+.bill-box {
+    max-width: 760px;
+    margin: auto;
+}
+
+@media print {
+    .primary-btn, .btn { display: none; }
+    body { background: white; }
+    .bill-box { box-shadow: none; }
+}
+
+@media (max-width: 600px) {
+    .hero-card h1 { font-size: 30px; }
+    .hero-card { padding: 24px; }
+    .food-card img { height: 165px; }
+}
+
+
+.bill-preview {
+    background: #fff9ea;
+    border: 1px solid #f0d49a;
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e4c485;
+}
+
+.bill-row:last-child {
+    border-bottom: none;
+}
+
+.bill-head {
+    font-weight: 800;
+    color: #7b552d;
+}
+
+.grand-row {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.final-bill-box {
+    background: #2e2018;
+    color: white;
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.payment-box {
+    background: #f4fff3;
+    border: 1px solid #bde8b8;
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.upi-card {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.qr-demo {
+    width: 130px;
+    height: 130px;
+    background: white;
+    border: 8px solid #222;
+    padding: 8px;
+}
+
+.qr-grid {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(90deg, #111 10px, transparent 10px) 0 0/20px 20px,
+        linear-gradient(#111 10px, transparent 10px) 0 0/20px 20px,
+        linear-gradient(90deg, transparent 10px, #111 10px) 5px 5px/25px 25px;
+}
+
+.small-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+}
+
+.success-bill {
+    background: #fff9ea;
+    border-radius: 18px;
+    padding: 18px;
+    text-align: left;
+    margin-top: 18px;
+}
+
+.status-badge {
+    background: #fff0cc;
+    color: #5b3d20;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+}
